@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ATS Applicants</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+:root{
+--bg:linear-gradient(135deg,#eef2ff,#fdf4ff,#ecfeff);
+--sidebar:linear-gradient(180deg,#4f46e5,#7c3aed);
+--card:rgba(255,255,255,0.75);
+--text:#1f2937;
+--muted:#6b7280;
+--accent:#7c3aed;
+}
+
+body.dark{
+--bg:#0f172a;
+--sidebar:linear-gradient(180deg,#020617,#0f172a);
+--card:#1e293b;
+--text:#f1f5f9;
+--muted:#94a3b8;
+--accent:#a78bfa;
+}
+
+body{
+display:flex;
+height:100vh;
+background:var(--bg);
+transition:0.3s;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:240px;
+background:var(--sidebar);
+color:white;
+padding:30px 20px;
+}
+
+.logo{
+font-size:22px;
+font-weight:600;
+margin-bottom:40px;
+}
+
+.menu a{
+display:block;
+text-decoration:none;
+color:#e5e7eb;
+padding:12px;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+.menu a:hover{
+background:rgba(255,255,255,0.15);
+}
+
+/* MAIN */
+
+.main{
+flex:1;
+padding:40px;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+margin-bottom:30px;
+}
+
+.search{
+padding:10px 15px;
+border-radius:10px;
+border:none;
+background:var(--card);
+}
+
+.toggle{
+padding:8px 15px;
+border:none;
+border-radius:20px;
+background:var(--accent);
+color:white;
+cursor:pointer;
+}
+
+/* TABLE */
+
+.table{
+background:var(--card);
+border-radius:16px;
+padding:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:14px;
+text-align:left;
+}
+
+th{
+color:var(--muted);
+}
+
+tr{
+border-bottom:1px solid rgba(0,0,0,0.1);
+}
+
+.status{
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;
+}
+
+.applied{
+background:#e0e7ff;
+color:#4338ca;
+}
+
+.interview{
+background:#dcfce7;
+color:#15803d;
+}
+
+.rejected{
+background:#fee2e2;
+color:#b91c1c;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">ATS</div>
+
+<div class="menu">
+<a href="dashboard.html">Dashboard</a>
+<a href="applicants.html">Applicants</a>
+<a href="#">Resume Analyzer</a>
+<a href="#">Interviews</a>
+<a href="#">Analytics</a>
+<a href="#">Settings</a>
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h2>Applicants</h2>
+
+<div>
+<input class="search" id="search" placeholder="Search candidates">
+<button class="toggle" onclick="toggleTheme()">🌙 Dark</button>
+</div>
+
+</div>
+
+<div class="table">
+
+<table id="applicantTable">
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Position</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Rahul Sharma</td>
+<td>rahul@email.com</td>
+<td>Frontend Developer</td>
+<td><span class="status applied">Applied</span></td>
+</tr>
+
+<tr>
+<td>Priya Singh</td>
+<td>priya@email.com</td>
+<td>UI Designer</td>
+<td><span class="status interview">Interview</span></td>
+</tr>
+
+<tr>
+<td>Arjun Patel</td>
+<td>arjun@email.com</td>
+<td>Backend Developer</td>
+<td><span class="status rejected">Rejected</span></td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+function toggleTheme(){
+document.body.classList.toggle("dark");
+}
+
+document.getElementById("search").addEventListener("keyup",function(){
+
+let filter=this.value.toLowerCase();
+let rows=document.querySelectorAll("#applicantTable tbody tr");
+
+rows.forEach(row=>{
+row.style.display=row.innerText.toLowerCase().includes(filter)?"":"none";
+});
+
+});
+
+</script>
+
+</body>
+</html>
